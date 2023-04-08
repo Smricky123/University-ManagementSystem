@@ -1,0 +1,12 @@
+C:\Users\MTI\Pictures\Saved Pictures\ASP.Net\UMS\LogicLayer\bin\Debug\LogicLayer.dll
+C:\Users\MTI\Pictures\Saved Pictures\ASP.Net\UMS\LogicLayer\bin\Debug\LogicLayer.pdb
+C:\Users\MTI\Pictures\Saved Pictures\ASP.Net\UMS\LogicLayer\bin\Debug\DataLayer.dll
+C:\Users\MTI\Pictures\Saved Pictures\ASP.Net\UMS\LogicLayer\bin\Debug\EntityFramework.dll
+C:\Users\MTI\Pictures\Saved Pictures\ASP.Net\UMS\LogicLayer\bin\Debug\DataLayer.pdb
+C:\Users\MTI\Pictures\Saved Pictures\ASP.Net\UMS\LogicLayer\bin\Debug\DataLayer.dll.config
+C:\Users\MTI\Pictures\Saved Pictures\ASP.Net\UMS\LogicLayer\bin\Debug\EntityFramework.xml
+C:\Users\MTI\Pictures\Saved Pictures\ASP.Net\UMS\LogicLayer\obj\Debug\LogicLayer.csproj.AssemblyReference.cache
+C:\Users\MTI\Pictures\Saved Pictures\ASP.Net\UMS\LogicLayer\obj\Debug\LogicLayer.csproj.CoreCompileInputs.cache
+C:\Users\MTI\Pictures\Saved Pictures\ASP.Net\UMS\LogicLayer\obj\Debug\LogicLayer.csproj.CopyComplete
+C:\Users\MTI\Pictures\Saved Pictures\ASP.Net\UMS\LogicLayer\obj\Debug\LogicLayer.dll
+C:\Users\MTI\Pictures\Saved Pictures\ASP.Net\UMS\LogicLayer\obj\Debug\LogicLayer.pdb
