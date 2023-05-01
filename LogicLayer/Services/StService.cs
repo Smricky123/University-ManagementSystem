@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using DataLayer;
 using DataLayer.Repos;
+using LogicLayer.DTOS;
 using UMS.DTOS;
 using University_Management_System;
 using University_Management_System.Models;
@@ -14,79 +17,57 @@ namespace LogicLayer.Services
     public class StService 
     {    
         public static List<StudentDto> Get()
-        {
-            List<Student> students = StudentRepo.Get();
-            List<StudentDto> studentDtos = new List<StudentDto>();
+        {          
+            var data = DataAccessFactory.StudentDataAccess().Read();
+            var config = new MapperConfiguration(c => { c.CreateMap<Student,StudentDto>(); });  
 
-            foreach (var student in students)
-            {
-                StudentDto studentDto = new StudentDto
-                {
-                    StudentId = student.StudentId,
-                    Name = student.Name,
-                    Age = student.Age,
-                    Dept = student.Dept,
-                    Phone = student.Phone,
-                    ImagePath = student.ImagePath
-                };
-                studentDtos.Add(studentDto);
-            }
-
-            return studentDtos;
+            var mapper = new Mapper(config);
+            var mapped = mapper.Map<List<StudentDto>>(data);
+            return mapped;
         }
 
         public static StudentDto Get(int id)
         {
-            Student student = StudentRepo.Get(id);
-            if (student == null)
+            var data = DataAccessFactory.StudentDataAccess().Read(id);
+            var config = new MapperConfiguration(c => { c.CreateMap<Student, StudentDto>(); });
+
+            var mapper = new Mapper(config);
+            return mapper.Map<StudentDto>(data);
+        }
+
+        public static StudentDto Create(StudentDto studentDto)
+        {  
+            var config = new MapperConfiguration(c => { c.CreateMap<Student, StudentDto>(); });
+
+            var mapper = new Mapper(config);
+            var mapped = mapper.Map<Student>(studentDto);
+            var data = DataAccessFactory.StudentDataAccess().Create(mapped);
+            if (data != null)
             {
-                return null;
+                return mapper.Map<StudentDto>(data);
             }
-
-            StudentDto studentDto = new StudentDto
-            {
-                StudentId = student.StudentId,
-                Name = student.Name,
-                Age = student.Age,
-                Dept = student.Dept,
-                Phone = student.Phone,
-                ImagePath = student.ImagePath
-            };
-
-            return studentDto;
-        }
-
-        public static bool Create(StudentDto studentDto)
-        {
-            Student student = new Student
-            {
-                Name = studentDto.Name,
-                Age = studentDto.Age,
-                Dept = studentDto.Dept,
-                Phone = studentDto.Phone,
-                ImagePath = studentDto.ImagePath
-            };
-            return StudentRepo.Create(student);
+            return null;
         }
 
 
-        public static bool Update(StudentDto studentDto)
+        public static StudentDto Update(StudentDto studentDto)
         {
-            Student student = new Student
+            var config = new MapperConfiguration(c => { c.CreateMap<Student, StudentDto>(); });
+
+            var mapper = new Mapper(config);
+            var mapped = mapper.Map<Student>(studentDto);
+            var data = DataAccessFactory.StudentDataAccess().Update(mapped);
+            if (data != null)
             {
-                StudentId = studentDto.StudentId,
-                Name = studentDto.Name,
-                Age = studentDto.Age,
-                Dept = studentDto.Dept,
-                Phone = studentDto.Phone,
-                ImagePath = studentDto.ImagePath
-            };
-            return StudentRepo.Update(student);
+                return mapper.Map<StudentDto>(data);
+            }
+            return null;
         }
 
         public static bool Delete(int id)
         {
-            return StudentRepo.Delete(id);
+            var data = DataAccessFactory.StudentDataAccess().Delete(id);
+            return data;
         }
     }
 }

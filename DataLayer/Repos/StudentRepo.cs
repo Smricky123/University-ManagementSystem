@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DataLayer.Interface;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,43 +10,46 @@ using University_Management_System.Models;
 
 namespace DataLayer.Repos
 {
-    public class StudentRepo
-    {
-        static UMSContext db;
-
-        static StudentRepo()
+    internal class StudentRepo : Repo, IRepo<Student, int,Student>
+    { 
+        public bool Delete(int id)
         {
-            db = new UMSContext();
+            var ex = Read(id);
+            db.Students.Remove(ex);
+            return db.SaveChanges() > 0;
         }
 
-        public static List<Student> Get()
+        Student IRepo<Student,int, Student>.Create(Student obj)
+        {
+            db.Students.Add(obj);
+            if(db.SaveChanges()>0)
+            return obj;
+            return null;
+        }
+
+        public List<Student>Read()
         {
             return db.Students.ToList();
         }
 
-        public static Student Get(int id)
+        public Student Read(int id)
         {
             return db.Students.Find(id);
         }
 
-        public static bool Create(Student student)
+       public Student Update(Student obj)
         {
-            db.Students.Add(student);
-            return db.SaveChanges() > 0;        
+            var ex = Read(obj.StudentId);
+            db.Entry(ex).CurrentValues.SetValues(obj);
+            if (db.SaveChanges() > 0)
+                return obj;
+                    return null;
         }
 
-        public static bool Update(Student student)
+        public List<Student> Get()
         {
-            var st = Get(student.StudentId);
-            db.Entry(st).CurrentValues.SetValues(student);
-            return db.SaveChanges() > 0;
-        }
-
-        public static bool Delete(int id)
-        {
-            var st = Get(id);
-            db.Students.Remove(st);
-            return db.SaveChanges() > 0;
-        }
+            throw new NotImplementedException();
+        } 
+        
     }
 }
